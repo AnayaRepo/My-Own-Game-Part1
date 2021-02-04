@@ -4,4 +4,8 @@ html, body {
 }
 canvas {
   display: block;
+  border: 10px solid #FF4772;
+  margin-right:auto;
+  margin-left:auto;
+  margin-top: auto;
 }

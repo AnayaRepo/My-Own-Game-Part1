@@ -40,7 +40,7 @@ class Baby{
           }
     }
     checkBabyStatus(){
-        if(sharpObjGroup.length>0){
+        if(sharpObjGroup.length>0 && dangerAlert>0){
             //console.log("testing....");
             for(var i=0;i<sharpObjGroup.length;i++){
                 
@@ -52,6 +52,8 @@ class Baby{
                 }
                 
             }
+          } else{
+            //gameState = END;
           }
     }
 }

@@ -12,6 +12,8 @@ var SO1, SO2, SO3, SO4, SO5, SO6, SO7, SO8;
 var pic1, img1;
 var score, game, toysCollected;
 var dangerAlert;
+var randNum;
+var gameoverImg;
 
 function preload(){
   toy1 = loadImage("images/toys/1.png");
@@ -33,6 +35,8 @@ function preload(){
   SO6 = loadImage("images/dangerous/6.png");
   SO7 = loadImage("images/dangerous/7.png");
   SO8 = loadImage("images/dangerous/8.png");
+
+  gameoverImg = loadImage("images/gameover.jpg");
 }
 
 function setup() {
@@ -87,19 +91,20 @@ function draw() {
     //to remove the img on the welcome screen
     pic1.remove();
 
-
+    console.log(game.gameLevel);
     
 
     //to spawn toys 
     spawnToys();
+    spawnSharpObj(game.gameLevel);
+    baby.checkBabyStatus();
     baby.calculateToysCollection();
   
     //for adding no. of toys collected and the score
-    if(frameCount%20===0){
-      score++;
+    if(frameCount%100===0){
+      score++;0
     }
-    
-  
+      
     //for level 1
     if(score<50){
       game.showLevel1();
@@ -119,6 +124,15 @@ function draw() {
     //for level 2
     else if(score>50 && score<100){
       game.showLevel2();
+      fill("black")
+      textSize(30);
+      textFont('Century Gothic');
+      textStyle(BOLD);
+      text("Score: "+score, 50, 50);
+      text("Toys Collected: "+toysCollected, 200, 50);
+      fill("#f50a0a")
+      text("Baby is Danger: "+dangerAlert+" Lives", width-350, 50);
+
       
       baby.display();
       mom.display();
@@ -126,6 +140,15 @@ function draw() {
     //for level 3
     else{
       game.showLevel3();
+      fill("black")
+      textSize(30);
+      textFont('Century Gothic');
+      textStyle(BOLD);
+      text("Score: "+score, 50, 50);
+      text("Toys Collected: "+toysCollected, 200, 50);
+      fill("#f50a0a")
+      text("Baby is Danger: "+dangerAlert+" Lives", width-350, 50);
+
            
       baby.display();
       mom.display();
@@ -149,14 +172,14 @@ function draw() {
   }
 
   else{
-
+    //game.endGame();
   }
   drawSprites();
 }
 
 //spawn toys
 function spawnToys(){
-  if(frameCount%100===0){
+  if(frameCount%200===0){
     var toy = createSprite(random(30, 800), random(50, 500));
 
     var randNum = Math.round(random(1,8));
@@ -184,11 +207,18 @@ function spawnToys(){
   } 
 }
 
-function spawnSharpObj(){
-  if(frameCount%10===0){
+function spawnSharpObj(level){
+  if(frameCount%400===0){
     var sharpObj = createSprite(random(30, 800), random(50, 500));
 
-    var randNum = Math.round(random(1,8));
+    if(level==="level1") {
+      randNum = Math.round(random(1,3));
+    } else if(level==="level2") {
+      randNum = Math.round(random(1,5));
+    } else{
+      randNum = Math.round(random(1,8));
+    }
+
     sharpObj.scale = 0.65;
     switch(randNum){
       case 1: sharpObj.addImage("plane", SO1);
@@ -209,6 +239,7 @@ function spawnSharpObj(){
         break;
       default: break;
     }
+
     sharpObjGroup.add(sharpObj);
   } 
 }

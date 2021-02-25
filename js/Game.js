@@ -2,9 +2,9 @@ class Game{
     constructor(){
         this.level1Bg = loadImage("images/bg/bg.png");
         this.level2Bg = loadImage("images/bg/bg4.jpg");
-        this.level3Bg = loadImage("images/bg/bg5.png");
+        this.level3Bg = loadImage("images/bg/bg6.jpeg");
         this.gameLevel = "level1";
-        this.gameOver = loadImage("images/gameover.jpg")
+        this.gameOver = loadImage("images/gameover.png")
     }
     showLevel1(){
         background(this.level1Bg);

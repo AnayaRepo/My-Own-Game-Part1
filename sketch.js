@@ -10,7 +10,7 @@ var toysGroup, sharpObjGroup;
 var toy1, toy2, toy3, toy4, toy5, toy6, toy7, toy8;
 var SO1, SO2, SO3, SO4, SO5, SO6, SO7, SO8;
 var pic1, img1;
-var score, game, toysCollected;
+var survivalTime, game, toysCollected;
 var dangerAlert;
 var randNum;
 var gameoverImg;
@@ -51,7 +51,7 @@ function setup() {
 
   pic1 = createSprite(displayWidth/2+250, displayHeight/2-50, 50, 50);
 
-  score = 0;
+  survivalTime = 0;
   toysCollected = 0;
   dangerAlert = 3;
 }
@@ -91,29 +91,28 @@ function draw() {
     //to remove the img on the welcome screen
     pic1.remove();
 
-    console.log(game.gameLevel);
-    
-
     //to spawn toys 
     spawnToys();
     spawnSharpObj(game.gameLevel);
+    //to check the no. of lives
     baby.checkBabyStatus();
+    //to check the no. of toys
     baby.calculateToysCollection();
   
-    //for adding no. of toys collected and the score
-    if(frameCount%100===0){
-      score++;0
+    //for calculating survival time
+    if(frameCount%30===0){
+      survivalTime++;0
     }
       
     //for level 1
-    if(score<50){
+    if(survivalTime<50){
       game.showLevel1();
       fill("black")
       textSize(30);
       textFont('Century Gothic');
       textStyle(BOLD);
-      text("Score: "+score, 50, 50);
-      text("Toys Collected: "+toysCollected, 200, 50);
+      text("Survival Time: "+survivalTime, 50, 50);
+      text("Toys Collected: "+toysCollected, 315, 50);
       fill("#f50a0a")
       text("Baby is Danger: "+dangerAlert+" Lives", width-350, 50);
 
@@ -122,14 +121,14 @@ function draw() {
      
     }
     //for level 2
-    else if(score>50 && score<100){
+    else if(survivalTime>50 && survivalTime<100){
       game.showLevel2();
       fill("black")
       textSize(30);
       textFont('Century Gothic');
       textStyle(BOLD);
-      text("Score: "+score, 50, 50);
-      text("Toys Collected: "+toysCollected, 200, 50);
+      text("Survival Time: "+survivalTime, 50, 50);
+      text("Toys Collected: "+toysCollected, 315, 50);
       fill("#f50a0a")
       text("Baby is Danger: "+dangerAlert+" Lives", width-350, 50);
 
@@ -144,8 +143,8 @@ function draw() {
       textSize(30);
       textFont('Century Gothic');
       textStyle(BOLD);
-      text("Score: "+score, 50, 50);
-      text("Toys Collected: "+toysCollected, 200, 50);
+      text("Survival Time: "+survivalTime, 50, 50);
+      text("Toys Collected: "+toysCollected, 315, 50);
       fill("#f50a0a")
       text("Baby is Danger: "+dangerAlert+" Lives", width-350, 50);
 
@@ -179,7 +178,7 @@ function draw() {
 
 //spawn toys
 function spawnToys(){
-  if(frameCount%200===0){
+  if(frameCount%150===0){
     var toy = createSprite(random(30, 800), random(50, 500));
 
     var randNum = Math.round(random(1,8));
@@ -208,7 +207,7 @@ function spawnToys(){
 }
 
 function spawnSharpObj(level){
-  if(frameCount%400===0){
+  if(frameCount%200===0){
     var sharpObj = createSprite(random(30, 800), random(50, 500));
 
     if(level==="level1") {

@@ -3,9 +3,9 @@ class Baby{
         this.x = x;
         this.y = y;
         this.baby = createSprite(this.x, this.y);
-        this.image = loadImage("images/baby/sad.png");
-        this.baby.addImage("happyBaby", this.image);
-        this.baby.scale = 0.5;
+        this.image = loadAnimation("images/baby/babyCrawl1.png", "images/baby/babyCrawl2.png", "images/baby/babyCrawl3.png", "images/baby/babyCrawl4.png", "images/baby/babyCrawl5.png", "images/baby/babyCrawl6.png", "images/baby/babyCrawl7.png", "images/baby/babyCrawl8.png");
+        this.baby.addAnimation("happyBaby", this.image);
+        this.baby.scale = 0.6;
         this.baby.visible = false;
     }
     display(){
@@ -26,7 +26,7 @@ class Baby{
 
     calculateToysCollection(){
         if(toysGroup.length>0){
-            console.log("testing....");
+            //console.log("testing....");
             for(var i=0;i<toysGroup.length;i++){
                 
                 if(toysGroup.get(i).isTouching(this.baby)){

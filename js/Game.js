@@ -4,7 +4,8 @@ class Game{
         this.level2Bg = loadImage("images/bg/bg4.jpg");
         this.level3Bg = loadImage("images/bg/bg6.jpeg");
         this.gameLevel = "level1";
-        this.gameOver = loadImage("images/gameover.png")
+        this.gameOver = loadImage("images/gameover.jpg");
+        this.loseSound = loadSound("sounds/youLose.mp3");
     }
     showLevel1(){
         background(this.level1Bg);
@@ -18,6 +19,7 @@ class Game{
         background(this.level3Bg);
     }
     endGame(){
-        background(this.gameOver);
+       background(this.gameOver);
+       this.youLose.play();
     }
 }

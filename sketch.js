@@ -105,7 +105,7 @@ function draw() {
     }
       
     //for level 1
-    if(survivalTime<50){
+    if(survivalTime<50 && dangerAlert>0){
       game.showLevel1();
       fill("black")
       textSize(30);
@@ -121,7 +121,7 @@ function draw() {
      
     }
     //for level 2
-    else if(survivalTime>50 && survivalTime<100){
+    else if(survivalTime>50 && survivalTime<100 && dangerAlert>0){
       game.showLevel2();
       fill("black")
       textSize(30);
@@ -137,7 +137,7 @@ function draw() {
       mom.display();
     }
     //for level 3
-    else{
+    else if(survivalTime>100 && dangerAlert>0){
       game.showLevel3();
       fill("black")
       textSize(30);
@@ -151,6 +151,10 @@ function draw() {
            
       baby.display();
       mom.display();
+    }else{
+      if(dangerAlert===0){
+        gameState = END;
+      }
     }
 
 
@@ -171,7 +175,12 @@ function draw() {
   }
 
   else{
-    //game.endGame();
+    toysGroup.destroyEach();
+    sharpObjGroup.destroyEach();
+    console.log("danger alert="+dangerAlert);
+    clear();
+    game.endGame();
+    baby.sadBabyOnGameover();
   }
   drawSprites();
 }
